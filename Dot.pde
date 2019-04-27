@@ -8,7 +8,11 @@ class Dot {
   boolean reachedGoal = false;
   boolean isBest = false;
   
-  float fitness = 0;
+  float fitness = 0.0;
+  
+  int fade = 255;
+  
+  int size = 6;
   
   Dot() {
     brain = new Brain(400);
@@ -20,11 +24,11 @@ class Dot {
   
   void show() {
     if(isBest) {
-      fill(0, 255, 0);
-      ellipse(pos.x, pos.y, 16, 16);
+      fill(251, 77, 61, fade);
+      ellipse(pos.x, pos.y, 12, 12);
     } else {
-      fill(0);
-      ellipse(pos.x, pos.y, 8, 8);
+      fill(0, 0, 0, fade);
+      ellipse(pos.x, pos.y, size, size);
     }
   }
   
@@ -33,7 +37,7 @@ class Dot {
       acc = brain.directions[brain.step];
       brain.step++;
     } else {
-      dead = true;
+      kill();
     }
     
     vel.add(acc);
@@ -46,16 +50,18 @@ class Dot {
       move();
       
       if(pos.x < 0 || pos.y < 0 || pos.x > width || pos.y > height) {
-        dead = true;
-      } else if(dist(pos.x, pos.y, goal.x, goal.y) < 5) {
+        kill();
+      } else if(dist(pos.x, pos.y, goal.x, goal.y) < 10) {
         reachedGoal = true;
       } else {
         for(int i = 0; i < obstacles.length; i++) {
-          if(pos.x < obstacles[i].x + obstacles[i].xVel + obstacles[i].w && pos.y < obstacles[i].y + obstacles[i].h && pos.x > obstacles[i].x + obstacles[i].xVel && pos.y > obstacles[i].y) {
-            dead = true;
+          if(pos.x - size / 2 < obstacles[i].x + obstacles[i].xVel + obstacles[i].w && pos.y - size / 2 < obstacles[i].y + obstacles[i].h && pos.x + size / 2 > obstacles[i].x + obstacles[i].xVel && pos.y + size / 2 > obstacles[i].y) {
+            kill();
           }
         }
       }
+    } else {
+      fade *= 0.9;
     }
   }
     
@@ -72,5 +78,9 @@ class Dot {
     Dot baby = new Dot();
     baby.brain = brain.clone();
     return baby;
+  }
+  
+  void kill() {
+    dead = true;
   }
 }

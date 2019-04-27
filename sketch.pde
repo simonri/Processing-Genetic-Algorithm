@@ -1,16 +1,17 @@
 Population test;
 
-PVector goal = new PVector(400, 10);
+PVector goal = new PVector(400, 40);
 Obstacle[] obstacles;
 
 boolean shouldDraw = false;
 
 float tempFitness = 0.0;
+int tempSteps = 0;
 
 void setup() {
   size(800, 800);
-  frameRate(60);
-  test = new Population(500);
+  frameRate(200);
+  test = new Population(3000);
   
   while(!shouldDraw) {
     if(test.allDotsDead()) {
@@ -22,16 +23,21 @@ void setup() {
 }
 
 void draw() {
-  background(255);
+  background(234, 196, 53);
   
   tempFitness += (test.bestFitness - tempFitness) * 0.1;
-  textSize(32);
-  fill(0);
-  text(nf(tempFitness, 0, 6), 10, 30);
+  textFont(createFont("Arial Bold", 16, true), 32);
+  fill(52, 89, 149);
+  text("Fitness: " + nf(tempFitness, 0, 4).replace(",", "."), 10, 34);
+  
+  tempSteps += (test.minStep - tempSteps) * 0.1;
+  textFont(createFont("Arial Bold", 16, true), 32);
+  fill(52, 89, 149);
+  text("Steps: " + tempSteps, 10, height - 20);
   
   if(shouldDraw) {
-    fill(255, 0, 0);
-    ellipse(goal.x, goal.y, 10, 10);
+    fill(251, 77, 61);
+    rect(goal.x - 10, goal.y - 10, 20, 20);
     
     if(test.allDotsDead()) {
       doAiStuff();

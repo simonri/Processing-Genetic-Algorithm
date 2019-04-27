@@ -4,9 +4,9 @@ class Population {
   float fitnessSum;
   int gen = 1;
 
-  boolean showOnlyBest = true;
+  boolean showOnlyBest = false;
 
-  int showAtGeneration = 60;
+  int showAtGeneration = 200;
 
   int bestDot = 0;
   int minStep = 1000;
@@ -21,7 +21,7 @@ class Population {
 
     obstacles = new Obstacle[3];
     for (int i = 0; i < obstacles.length; i++) {
-      obstacles[i] = new Obstacle(width / 2 - 700 / 2, 200 + i * 120, 700, 20);
+      obstacles[i] = new Obstacle(width / 2 - 500 / 2, 200 + i * 120, 500, 40);
     }
   }
 
@@ -29,10 +29,12 @@ class Population {
     if(showOnlyBest) {
       dots[bestDot].show();
     } else {
-      for (int i = 0; i < dots.length; i++) {
+      for (int i = 1; i < dots.length; i++) {
         dots[i].show();
       }
     }
+    
+    dots[0].show();
 
     for (int i = 0; i < obstacles.length; i++) {
       obstacles[i].show();
@@ -42,7 +44,7 @@ class Population {
   void update() {
     for (int i = 0; i < dots.length; i++) {
       if (dots[i].brain.step > minStep) {
-        dots[i].dead = true;
+        dots[i].kill();
       } else {
         dots[i].update();
       }

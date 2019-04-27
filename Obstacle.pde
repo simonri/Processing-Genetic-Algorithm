@@ -14,7 +14,7 @@ class Obstacle {
   }
   
   void show() {
-    fill(100, 100, 100);
+    fill(52, 89, 149);
     rect(x + xVel, y + yVel, w, h);
     noStroke();
   }
