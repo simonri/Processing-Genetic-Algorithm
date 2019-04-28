@@ -20,17 +20,17 @@ class Obstacle {
   }
   
   void update() {
-    if(way) {
-      if(x + xVel + w / 2 > width / 2 + 100) {
+    /*if(way) {
+      if(x + xVel + w / 2 > width / 2 - 200 + x) {
         way = false;
       }
     } else {
-      if(x + xVel + w / 2 < width / 2 - 100) {
+      if(x + xVel + w / 2 < width / 2 - 300 + x) {
         way = true;
       }
     }
     
-    xVel += way ? 2 : -2;
+    xVel += way ? 1 : -1; */
   }
   
   void reset() {

@@ -1,6 +1,6 @@
 Population test;
 
-PVector goal = new PVector(400, 40);
+PVector goal = new PVector(60, 60);
 Obstacle[] obstacles;
 
 boolean shouldDraw = false;
@@ -10,8 +10,8 @@ int tempSteps = 0;
 
 void setup() {
   size(800, 800);
-  frameRate(200);
-  test = new Population(400);
+  frameRate(60);
+  test = new Population(2000);
   
   while(!shouldDraw) {
     if(test.allDotsDead()) {
@@ -46,7 +46,7 @@ void draw() {
       
       if(shouldDraw) {
         test.show();
-        // saveFrame("frames/####.png");
+        saveFrame("frames/####.png");
       }
     }
   }

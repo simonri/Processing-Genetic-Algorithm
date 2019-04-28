@@ -6,10 +6,10 @@ class Population {
 
   boolean showOnlyBest = false;
 
-  int showAtGeneration = 40;
+  int showAtGeneration = 0;
 
   int bestDot = 0;
-  int minStep = 0;
+  int minStep = 1000;
 
   float bestFitness;
 
@@ -19,10 +19,12 @@ class Population {
       dots[i] = new Dot();
     }
 
-    obstacles = new Obstacle[3];
-    for (int i = 0; i < obstacles.length; i++) {
-      obstacles[i] = new Obstacle(width / 2 - 500 / 2, 200 + i * 120, 500, 40);
-    }
+    obstacles = new Obstacle[2];
+    obstacles[0] = new Obstacle(120, 120, 40, 400);
+    obstacles[1] = new Obstacle(120, 120 + 400 - 40, 400, 40);
+    //for (int i = 0; i < obstacles.length; i++) {
+    //  obstacles[i] = new Obstacle(200 + i * 120, height / 2 - 500 / 2, 40, 500);
+    //}
   }
 
   void show() {
