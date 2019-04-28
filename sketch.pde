@@ -11,7 +11,7 @@ int tempSteps = 0;
 void setup() {
   size(800, 800);
   frameRate(200);
-  test = new Population(3000);
+  test = new Population(400);
   
   while(!shouldDraw) {
     if(test.allDotsDead()) {
@@ -30,7 +30,7 @@ void draw() {
   fill(52, 89, 149);
   text("Fitness: " + nf(tempFitness, 0, 4).replace(",", "."), 10, 34);
   
-  tempSteps += (test.minStep - tempSteps) * 0.1;
+  tempSteps += (test.minStep - tempSteps) * 0.01;
   textFont(createFont("Arial Bold", 16, true), 32);
   fill(52, 89, 149);
   text("Steps: " + tempSteps, 10, height - 20);
@@ -46,6 +46,7 @@ void draw() {
       
       if(shouldDraw) {
         test.show();
+        // saveFrame("frames/####.png");
       }
     }
   }

@@ -6,10 +6,10 @@ class Population {
 
   boolean showOnlyBest = false;
 
-  int showAtGeneration = 200;
+  int showAtGeneration = 40;
 
   int bestDot = 0;
-  int minStep = 1000;
+  int minStep = 0;
 
   float bestFitness;
 
